@@ -1,0 +1,42 @@
+{
+    "name": "nav33d/craft-relations",
+    "description": "A field type to show reverse related elements",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craftcms3",
+        "craft-plugin",
+        "relations"
+    ],
+    "support": {
+        "docs": "https://github.com/nav33d/craft-relations/blob/master/README.md",
+        "issues": "https://github.com/nav33d/craft-relations/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Naveed Ziarab",
+            "homepage": "https://naveedziarab.co.uk/"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "nav33d\\relations\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Relations",
+        "handle": "relations",
+        "schemaVersion": "1.0.0",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/nav33d/relations/master/CHANGELOG.md",
+        "class": "nav33d\\relations\\Relations"
+    }
+}

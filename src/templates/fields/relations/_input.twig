@@ -1,0 +1,39 @@
+{#
+/**
+ * Relations plugin for Craft CMS 3
+ *
+ * A field type to show reverse related elements
+ *
+ * @author    Naveed Ziarab
+ * @link      https://naveedziarab.co.uk/
+ * @copyright Copyright (c) 2018 Nav33d
+ * @since     1.0.0
+ */
+#}
+
+{% if relations|length %}
+  <div class="relations__total-container">
+    <span class="relations__total">Total: <span class="h-text--bold">{{ relations|length }}</span></span>
+  </div>
+  <table class="data fullwidth collapsible">
+    <tr>
+      <th class="light">Title</th>
+      <th class="light">Type</th>
+      <th class="light">Link</th>
+    </tr>
+    {% for item in relations %}
+        <tr>
+            <td>{{ item.title }}</td>
+            <td>{{ item.displayName() ?? "Unknown" }}</td>
+            <td>
+              {% if item.hasUris() %}
+                <a href="{{ item.getCpEditUrl() }}">Show</a>
+              {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p class="light h-text--bold">No relations found</p>
+{% endif %}
+

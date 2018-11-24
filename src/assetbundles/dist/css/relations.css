@@ -1,0 +1,19 @@
+/**
+Name : Relations
+Description : Style for relations field type
+State : Green
+*/
+
+.relations__total {
+    display: inline-block;
+    background: #D3D3D3;
+    border-radius: 2px;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 12px;
+}
+
+.h-text--bold {
+    font-weight: bold;
+}
