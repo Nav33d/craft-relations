@@ -23,3 +23,15 @@ composer require nav33d/relations
 ```
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Relations.
+
+## Screenshots
+
+![Screenshot](resources/screenshots/relations-assets-related-items.png)
+---
+![Screenshot](resources/screenshots/relations-entry-related-items.png)
+
+## Credits
+
+- Relations icon by [Noun Project](https://thenounproject.com/search/?q=relation&i=1320549)
+
+Brought to you by [Naveed Ziarab](https://naveedziarab.co.uk)
