@@ -32,7 +32,7 @@ class Relations extends Component
 
         $relatedIds = (new Query())
             ->select(['sourceId'])
-            ->from(['{{relations}}'])
+            ->from(['{{%relations}}'])
             ->where(['targetId' => $element->id])
             ->column();
 
