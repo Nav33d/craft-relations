@@ -2,7 +2,7 @@
     "name": "nav33d/craft-relations",
     "description": "A field type to show reverse related elements",
     "type": "craft-plugin",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "keywords": [
         "craft",
         "cms",
@@ -12,7 +12,7 @@
         "relations"
     ],
     "support": {
-        "docs": "https://github.com/nav33d/craft-relations/blob/master/README.md",
+        "docs": "https://github.com/nav33d/craft-relations/blob/v1/README.md",
         "issues": "https://github.com/nav33d/craft-relations/issues"
     },
     "license": "MIT",
@@ -36,7 +36,7 @@
         "schemaVersion": "1.0.0",
         "hasCpSettings": false,
         "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/nav33d/relations/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/nav33d/craft-relations/v1/CHANGELOG.md",
         "class": "nav33d\\relations\\Relations"
     }
 }
