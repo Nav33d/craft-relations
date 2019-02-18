@@ -23,12 +23,10 @@
     </tr>
     {% for item in relations %}
         <tr>
-            <td>{{ item.title }}</td>
+            <td>{{ item.title ? item.title : item.firstName and item.lastName ? item.firstName~' '~item.lastName }}</td>
             <td>{{ item.displayName() ?? "Unknown" }}</td>
             <td>
-              {% if item.hasUris() %}
-                <a href="{{ item.getCpEditUrl() }}">Show</a>
-              {% endif %}
+              <a href="{{ item.getCpEditUrl() }}">Show</a>
             </td>
         </tr>
     {% endfor %}
