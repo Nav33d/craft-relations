@@ -22,15 +22,16 @@
       <th class="light">Link</th>
     </tr>
     {% for item in relations %}
-        <tr>
-            <td>{{ item.title }}</td>
-            <td>{{ item.displayName() ?? "Unknown" }}</td>
-            <td>
-              {% if item.hasUris() %}
-                <a href="{{ item.getCpEditUrl() }}">Show</a>
-              {% endif %}
-            </td>
-        </tr>
+      {% set title = item.title ?? item.username ?? null %}
+      <tr>
+          <td>{{ title }}</td>
+          <td>{{ item.displayName() ?? "Unknown" }}</td>
+          <td>
+            {% if item.getCpEditUrl() %} 
+              <a href="{{ item.getCpEditUrl() }}">Show</a>
+            {% endif %}
+          </td>
+      </tr>
     {% endfor %}
   </table>
 {% else %}
