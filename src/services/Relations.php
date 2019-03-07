@@ -45,7 +45,12 @@ class Relations extends Component
         foreach ( $relatedIds as $id )
         {
             $relatedElement = $elementsService->getElementById($id);
-
+            
+            if( !$relatedElement )
+            {
+                continue;
+            } 
+            
             if ( method_exists($relatedElement, 'getOwner') && $relatedElement->getOwner() )
             {
                 while ( method_exists($relatedElement, 'getOwner') )
