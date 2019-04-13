@@ -30,6 +30,18 @@ composer require nav33d/craft-relations
 ---
 ![Screenshot](resources/screenshots/relations-entry-related-items.png)
 
+## Accessing relations in template
+
+You can access relations in template using your field handle. Lets say your field is called `relations`, you can use the following code block to access relations:
+
+```
+{% if entry.relations %}
+  {% for item in entry.relations %}
+    <h2>{{ item.title }}</h2>
+  {% endfor %}
+{% endif %}
+```
+
 ## Credits
 
 - Relations icon by [Noun Project](https://thenounproject.com/search/?q=relation&i=1320549)

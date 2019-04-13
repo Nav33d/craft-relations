@@ -45,6 +45,15 @@ class Relations extends Field
     /**
      * @inheritdoc
      */
+    public function normalizeValue($value, ElementInterface $element = null)
+    {
+        return RelationsPlugin::$plugin->relations->get($element);
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
         $view = Craft::$app->getView();
@@ -53,7 +62,11 @@ class Relations extends Field
         $view->registerAssetBundle(RelationsAsset::class);
 
         // Get reverse related elements
-        $relations = RelationsPlugin::$plugin->relations->get($element);
+        $relations = $value;
+        if ( !$relations )
+        {
+            $relations = RelationsPlugin::$plugin->relations->get($element);
+        }
 
         return $view->renderTemplate('relations/fields/relations/_input', [
             'relations' => $relations,
