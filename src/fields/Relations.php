@@ -18,12 +18,22 @@ use craft\helpers\Db;
 use yii\db\Schema;
 use craft\helpers\Json;
 use craft\helpers\Template;
+use craft\fields\Entries;
+use craft\fields\Assets;
+use craft\fields\Users;
+use craft\fields\Categories;
+use craft\fields\Tags;
 
 use nav33d\relations\Relations as RelationsPlugin;
 use nav33d\relations\assetbundles\RelationsAsset;
 
 class Relations extends Field
 {
+    /**
+     * @var mixed Target field setting
+     */
+    public $targetFields = '*';
+
 
     // Static Methods
     // =========================================================================
@@ -47,7 +57,55 @@ class Relations extends Field
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
-        return RelationsPlugin::$plugin->relations->get($element);
+        return RelationsPlugin::$plugin->relations->get($element, $this->targetFields);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function settingsAttributes(): array
+    {
+        $attributes = parent::settingsAttributes();
+        $attributes[] = 'targetFields';
+        return $attributes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSettingsHtml()
+    {
+        // Get available fields
+        $fields = [];
+        /** @var Field $field */
+        foreach (Craft::$app->fields->getAllFields() as $field) {
+            switch(true) {
+                case $field instanceof Entries:
+                    $fields[$field->id] = "$field->name (Entries)";
+                    break;
+                case $field instanceof Assets:
+                    $fields[$field->id] = "$field->name (Assets)";
+                    break;
+                case $field instanceof Users:
+                    $fields[$field->id] = "$field->name (Users)";
+                    break;
+                case $field instanceof Categories:
+                    $fields[$field->id] = "$field->name (Categories)";
+                    break;
+                case $field instanceof Tags:
+                    $fields[$field->id] = "$field->name (Tags)";
+                    break;
+            }
+        }
+
+        // Add "field" select template
+        return $fieldSelectTemplate = Craft::$app->view->renderTemplate(
+            'relations/_settings',
+            [
+                'fields' => $fields,
+                'settings' => $this->getSettings(),
+            ]
+        );
     }
 
 
@@ -65,7 +123,7 @@ class Relations extends Field
         $relations = $value;
         if ( !$relations )
         {
-            $relations = RelationsPlugin::$plugin->relations->get($element);
+            $relations = RelationsPlugin::$plugin->relations->get($element, $this->targetFields);
         }
 
         return $view->renderTemplate('relations/fields/relations/_input', [

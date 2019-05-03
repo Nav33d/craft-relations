@@ -21,7 +21,7 @@ use nav33d\relations\Relations as RelationsPlugin;
 class Relations extends Component
 {
 
-    public function get($element)
+    public function get($element, $targetFields)
     {
         $relatedElements = [];
 
@@ -30,10 +30,18 @@ class Relations extends Component
             return [];
         }
 
+        $where = [];
+        $where['targetId'] = $element->id;
+        
+        if ($targetFields != '*') {
+            $where['fieldId'] = $targetFields;
+        }
+        
+
         $relatedIds = (new Query())
             ->select(['sourceId'])
             ->from(['{{%relations}}'])
-            ->where(['targetId' => $element->id])
+            ->where($where)
             ->column();
 
         if ( !$relatedIds )

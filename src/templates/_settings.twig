@@ -1,0 +1,11 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.checkboxSelectField({
+    label: "Target Fields",
+    instructions: "Set the target fields of this relation.",
+    id: 'targetFields',
+    name: 'targetFields',
+    options: fields,
+    showAllOption: true,
+    values: settings.targetFields
+})}}
