@@ -79,22 +79,14 @@ class Relations extends Field
         $fields = [];
         /** @var Field $field */
         foreach (Craft::$app->fields->getAllFields() as $field) {
-            switch(true) {
-                case $field instanceof Entries:
-                    $fields[$field->id] = "$field->name (Entries)";
-                    break;
-                case $field instanceof Assets:
-                    $fields[$field->id] = "$field->name (Assets)";
-                    break;
-                case $field instanceof Users:
-                    $fields[$field->id] = "$field->name (Users)";
-                    break;
-                case $field instanceof Categories:
-                    $fields[$field->id] = "$field->name (Categories)";
-                    break;
-                case $field instanceof Tags:
-                    $fields[$field->id] = "$field->name (Tags)";
-                    break;
+            if (
+                $field instanceof Entries       ||
+                $field instanceof Assets        ||
+                $field instanceof Users         ||
+                $field instanceof Categories    ||
+                $field instanceof Tags
+            ) {
+                $fields[$field->id] = "$field->name";
             }
         }
 
