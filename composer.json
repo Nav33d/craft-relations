@@ -2,7 +2,7 @@
     "name": "nav33d/craft-relations",
     "description": "A field type to show reverse related elements",
     "type": "craft-plugin",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "keywords": [
         "craft",
         "cms",

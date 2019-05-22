@@ -18,11 +18,12 @@ use craft\helpers\Db;
 use yii\db\Schema;
 use craft\helpers\Json;
 use craft\helpers\Template;
+use craft\base\PreviewableFieldInterface;
 
 use nav33d\relations\Relations as RelationsPlugin;
 use nav33d\relations\assetbundles\RelationsAsset;
 
-class Relations extends Field
+class Relations extends Field implements PreviewableFieldInterface
 {
 
     // Static Methods
@@ -80,6 +81,15 @@ class Relations extends Field
     public function serializeValue($value, ElementInterface $element = null)
     {
         return null;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getTableAttributeHtml($value, ElementInterface $element): string
+    {
+        return '<span>'. count($value) .'</span>';
     }
 
 
