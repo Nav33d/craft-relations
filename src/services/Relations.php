@@ -31,9 +31,10 @@ class Relations extends Component
         }
 
         $relatedIds = (new Query())
-            ->select(['sourceId'])
-            ->from(['{{%relations}}'])
-            ->where(['targetId' => $element->id])
+            ->select('{{%elements}}.id')
+            ->from('{{%elements}}')
+            ->leftJoin('{{%relations}}', '{{%elements}}.id = {{%relations}}.sourceId')
+            ->where(['{{%relations}}.targetId' => $element->id, '{{%elements}}.revisionId' => null])
             ->column();
 
         if ( !$relatedIds )
