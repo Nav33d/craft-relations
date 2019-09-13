@@ -12,7 +12,10 @@
 namespace nav33d\relations\services;
 
 use Craft;
-use craft\db\Query;
+use craft\elements\Entry;
+use craft\elements\Category;
+use craft\elements\User;
+use craft\elements\Asset;
 
 use yii\base\Component;
 
@@ -23,50 +26,16 @@ class Relations extends Component
 
     public function get($element)
     {
-        $relatedElements = [];
-
-        if ( !$element )
-        {
+        if (!$element) {
             return [];
         }
 
-        $relatedIds = (new Query())
-            ->select('{{%elements}}.id')
-            ->from('{{%elements}}')
-            ->leftJoin('{{%relations}}', '{{%elements}}.id = {{%relations}}.sourceId')
-            ->where(['{{%relations}}.targetId' => $element->id, '{{%elements}}.revisionId' => null])
-            ->column();
-
-        if ( !$relatedIds )
-        {
-            return [];
-        }
-
-        $elementsService = Craft::$app->elements;
-        foreach ( $relatedIds as $id )
-        {
-            $relatedElement = $elementsService->getElementById($id);
-            
-            if( !$relatedElement )
-            {
-                continue;
-            } 
-            
-            if ( method_exists($relatedElement, 'getOwner') && $relatedElement->getOwner() )
-            {
-                while ( method_exists($relatedElement, 'getOwner') )
-                {
-                    $relatedElement = $relatedElement->getOwner();
-                }
-            }
-
-            if ( !isset($relatedElements[$relatedElement->id]) )
-            {
-                $relatedElements[$relatedElement->id] = $relatedElement;
-            }
-        }
-
-        return $relatedElements;
+        return array_merge(
+            Entry::find()->relatedTo(["targetElement" => $element])->all(),
+            Category::find()->relatedTo(["targetElement" => $element])->all(),
+            Asset::find()->relatedTo(["targetElement" => $element])->all(),
+            User::find()->relatedTo(["targetElement" => $element])->all()
+        );
     }
 
 }
