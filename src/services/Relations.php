@@ -25,7 +25,7 @@ class Relations extends Component
     {
         $relatedElements = [];
 
-        if ( !$element )
+        if ( !$element || !$element->id )
         {
             return [];
         }
